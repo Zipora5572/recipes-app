@@ -18,8 +18,7 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
   const validationSchema = object().shape({
     title: string().required('Title is required'),
     description: string().required('Description is required'),
-    ingredients: array().of(string().required('Ingredient is required'))
-      .min(1, 'At least one ingredient is required'),
+    ingredients: array().of(string().required('Ingredient is required')).min(1, 'At least one ingredient is required'),
     instructions: string().required('Instructions are required'),
   });
 
@@ -28,24 +27,13 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
     defaultValues: { ingredients: [''] }
   });
 
-  const { fields: ingredientFields, append, remove } = useFieldArray({
-    control,
-    name: "ingredients"
-  });
-
+  const { fields: ingredientFields, append, remove } = useFieldArray({ control, name: "ingredients" });
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useContext(UserContext);
 
   const onSubmit = (data: Omit<RecipeType, 'id' | 'authorId'>) => {
-    const recipeToAdd = {
-      ...data,
-      authorId: user.id,
-      ingredients: data.ingredients || []
-    };
-    dispatch(addRecipe(recipeToAdd as RecipeType));
-    reset();
-    dispatch(fetchData());
-    handleClose();
+    dispatch(addRecipe({ ...data, authorId: user.id, ingredients: data.ingredients || [] } as RecipeType));
+    reset(); dispatch(fetchData()); handleClose();
   };
 
   const fields = [
@@ -54,67 +42,22 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
   ];
 
   return (
-    <ModalWrapper 
-      open={open} 
-      handleClose={handleClose} 
-      title="Add Recipe" 
-      onSubmit={handleSubmit(onSubmit)} 
-      submitText="Add Recipe"
-    >
+    <ModalWrapper open={open} handleClose={handleClose} title="Add Recipe" onSubmit={handleSubmit(onSubmit)} submitText="Add Recipe">
       <form>
-        <FormFields
-          fields={fields}
-          register={register}
-          errors={errors}
-        />
-        <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: '#ff5722' }}>
-          Ingredients
-        </Typography>
+        <FormFields fields={fields} register={register} errors={errors} />
+        <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: '#ff5722' }}>Ingredients</Typography>
         {ingredientFields.map((field, index) => (
           <Box key={field.id} display="flex" alignItems="center" mb={2}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label={`Ingredient ${index + 1}`}
-              {...register(`ingredients.${index}` as const)}
-              error={!!errors.ingredients?.[index]}
-              helperText={errors.ingredients?.[index]?.message}
-              sx={{
-                '& .MuiInputBase-root': {
-                  borderColor: theme.palette.primary.main,
-                },
-              }}
-            />
+            <TextField fullWidth margin="normal" label={`Ingredient ${index + 1}`} {...register(`ingredients.${index}` as const)} error={!!errors.ingredients?.[index]} helperText={errors.ingredients?.[index]?.message} sx={{ '& .MuiInputBase-root': { borderColor: theme.palette.primary.main } }} />
             <IconButton onClick={() => remove(index)} edge="end" aria-label="remove" size="large" sx={{ color: theme.palette.error.main }}>
               <RemoveIcon />
             </IconButton>
           </Box>
         ))}
-        <Button 
-          type="button" 
-          variant="contained" 
-          color="primary" 
-          onClick={() => append('')} 
-          startIcon={<AddIcon />}
-          sx={{ mt: 2, backgroundColor: '#ff5722', '&:hover': { backgroundColor: '#e64a19' } }} // Custom hover effect
-        >
+        <Button type="button" variant="contained" color="primary" onClick={() => append('')} startIcon={<AddIcon />} sx={{ mt: 2, backgroundColor: '#ff5722', '&:hover': { backgroundColor: '#e64a19' } }}>
           Add Ingredient
         </Button>
-        <TextField 
-          fullWidth 
-          margin="normal" 
-          label="Instructions" 
-          multiline 
-          rows={4} 
-          {...register('instructions')} 
-          error={!!errors.instructions} 
-          helperText={errors.instructions?.message} 
-          sx={{
-            '& .MuiInputBase-root': {
-              borderColor: theme.palette.primary.main,
-            },
-          }}
-        />
+        <TextField fullWidth margin="normal" label="Instructions" multiline rows={4} {...register('instructions')} error={!!errors.instructions} helperText={errors.instructions?.message} sx={{ '& .MuiInputBase-root': { borderColor: theme.palette.primary.main } }} />
       </form>
     </ModalWrapper>
   );

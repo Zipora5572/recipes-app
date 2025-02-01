@@ -31,7 +31,7 @@ const FooterText = styled(Typography)(({ theme }) => ({
 const Footer = () => {
     return (
         <FooterContainer>
-            <StyledLink href="https://github.com/Zipora5572" target="_blank">
+            <StyledLink href="https://github.com/Zipora5572/recipes-app" target="_blank">
                 <GitHubIcon fontSize="small" />
             </StyledLink>
             <FooterText variant="body2">

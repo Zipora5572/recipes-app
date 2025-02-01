@@ -20,8 +20,7 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
   const validationSchema = object().shape({
     title: string().required('Title is required'),
     description: string().required('Description is required'),
-    ingredients: array().of(string().required('Ingredient is required'))
-      .min(1, 'At least one ingredient is required'),
+    ingredients: array().of(string().required('Ingredient is required')).min(1, 'At least one ingredient is required'),
     instructions: string().required('Instructions are required'),
   });
 
@@ -29,39 +28,31 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
     resolver: yupResolver(validationSchema),
   });
 
-  const { fields: ingredientFields, append, remove } = useFieldArray({
-    control,
-    name: "ingredients"
-  });
+  const { fields: ingredientFields, append, remove } = useFieldArray({ control, name: "ingredients" });
 
   useEffect(() => {
-    if (recipe) {
-       
-      reset(recipe);
-    }
-  }, [recipe, reset, user.id]);
+    if (recipe) reset(recipe);
+  }, [recipe, reset]);
 
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = (data: RecipeType) => {
-    const recipeToUpdate = {
-      ...data,
-      authorId: user.id,
-    };
-    dispatch(updateRecipe(recipeToUpdate));
-    reset();
-    dispatch(fetchData());
-    handleClose();
+    dispatch(updateRecipe({ ...data, authorId: user.id }));
+    reset(); dispatch(fetchData()); handleClose();
   };
+
+  const textFieldProps = (name: string, label: string, errorMessage?: string) => ({
+    fullWidth: true,
+    margin: "normal" as const,
+    label,
+    error: !!errorMessage,
+    helperText: errorMessage,
+    sx: { '& .MuiInputBase-root': { borderColor: theme.palette.primary.main } },
+    ...register(name),
+  });
+
   return (
-    <> 
-     <ModalWrapper 
-      open={open } 
-      handleClose={handleClose} 
-      title="Edit Recipe" 
-      onSubmit={handleSubmit(onSubmit)} 
-      submitText="Update Recipe"
-    >     
+    <ModalWrapper open={open} handleClose={handleClose} title="Edit Recipe" onSubmit={handleSubmit(onSubmit)} submitText="Update Recipe">
       <form>
         <FormFields
           fields={[
@@ -76,52 +67,21 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
         </Typography>
         {ingredientFields.map((field, index) => (
           <Box key={field.id} display="flex" alignItems="center" mb={2}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label={`Ingredient ${index + 1}`}
-              {...register(`ingredients.${index}` as const)}
-              error={!!errors.ingredients?.[index]}
-              helperText={errors.ingredients?.[index]?.message}
-              sx={{
-                '& .MuiInputBase-root': {
-                  borderColor: theme.palette.primary.main,
-                },
-              }}
-            />
+            <TextField {...textFieldProps(`ingredients.${index}`, `Ingredient ${index + 1}`, errors.ingredients?.[index]?.message)} />
             <IconButton onClick={() => remove(index)} edge="end" aria-label="remove" size="large" sx={{ color: theme.palette.error.main }}>
               <RemoveIcon />
             </IconButton>
           </Box>
         ))}
-        <Button 
-          type="button" 
-          variant="contained" 
-          color="primary" 
-          onClick={() => append('')} 
-          startIcon={<AddIcon />}
-          sx={{ mt: 2, backgroundColor: theme.palette.secondary.main, '&:hover': { backgroundColor: theme.palette.secondary.dark } }} 
-        >
+        <Button type="button" variant="contained" color="primary" onClick={() => append('')}
+         startIcon={<AddIcon />} 
+         sx={{ mt: 2, backgroundColor: theme.palette.secondary.main, '&:hover': { backgroundColor: theme.palette.secondary.dark } }}>
           Add Ingredient
         </Button>
-        <TextField 
-          fullWidth 
-          margin="normal" 
-          label="Instructions" 
-          multiline 
-          rows={4} 
-          {...register('instructions')} 
-          error={!!errors.instructions} 
-          helperText={errors.instructions?.message} 
-          sx={{
-            '& .MuiInputBase-root': {
-              borderColor: theme.palette.primary.main,
-            },
-          }}
-        />
+        <TextField {...textFieldProps('instructions', 'Instructions', errors.instructions?.message)} multiline rows={4} />
       </form>  
     </ModalWrapper>
-    </>
   );
 };
+
 export default EditRecipe;

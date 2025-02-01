@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+# Build directories
+build/
+dist/
+# Environment files
+.env
+# Logs
+logs/
+*.log
+# Dependency directories
+recipesReact/node_modules/
+nodeForRecipes/node_modules/
+ 

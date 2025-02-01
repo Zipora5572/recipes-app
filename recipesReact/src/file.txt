@@ -1,0 +1,1960 @@
+// Source: App.css
+// Source: App.tsx
+import React, { useReducer } from 'react';
+import './App.css';
+import UserReducer, { initialState, UserContext } from './models/User';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './components/AppRoutes';
+import { Provider } from "react-redux";
+import store from './store/store';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './theme/theme';
+
+
+const App = () => {
+  const [user, userDispatch] = useReducer(UserReducer, initialState);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <UserContext value={{ user, userDispatch }}>
+          <RouterProvider router={router} />
+        </UserContext>
+      </Provider>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+// Source: assets\react.svg
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
+// Source: components\About.tsx
+import { Container, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+
+const About = () => {
+    return (
+        <>
+          <Container>
+               
+           
+                <Typography variant="h4" component="h1" gutterBottom align="center" color="#ff5722">
+                    About Recipes App 
+                </Typography>
+              
+                <Typography variant="body1" paragraph>
+                    Welcome to the Recipes App!  This application allows users to browse, add, and manage their favorite recipes.
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    With a user-friendly interface, you can easily navigate through various recipes, add new ones, and even save your favorites for quick access. 
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    Our mission is to provide a platform for food enthusiasts to share their culinary creations and discover new dishes from around the world. 
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    Thank you for using our app, and happy cooking! 
+                </Typography>
+                </Container>
+        </>
+    );
+};
+
+export default About;
+// Source: components\AddRecipe.tsx
+import { useContext } from "react";
+import { AppDispatch } from "../store/store";
+import { addRecipe, fetchData, RecipeType } from "../store/recipesSlice";
+import { useDispatch } from "react-redux";
+import { UserContext } from "../models/User";
+import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { array, object, string } from "yup";
+import { useFieldArray, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ModalWrapper from "./ModalWrapper";
+import FormFields from "./FormFields";
+import { useTheme } from '@mui/material/styles';
+
+const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => void; }) => {
+  const theme = useTheme();
+  const validationSchema = object().shape({
+    title: string().required('Title is required'),
+    description: string().required('Description is required'),
+    ingredients: array().of(string().required('Ingredient is required'))
+      .min(1, 'At least one ingredient is required'),
+    instructions: string().required('Instructions are required'),
+  });
+
+  const { register, handleSubmit, formState: { errors }, control, reset } = useForm<RecipeType>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: { ingredients: [''] }
+  });
+
+  const { fields: ingredientFields, append, remove } = useFieldArray({
+    control,
+    name: "ingredients"
+  });
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { user } = useContext(UserContext);
+
+  const onSubmit = (data: Omit<RecipeType, 'id' | 'authorId'>) => {
+    const recipeToAdd = {
+      ...data,
+      authorId: user.id,
+      ingredients: data.ingredients || []
+    };
+    dispatch(addRecipe(recipeToAdd as RecipeType));
+    reset();
+    dispatch(fetchData());
+    handleClose();
+  };
+
+  const fields = [
+    { name: 'title', label: 'Title', required: true, error: errors.title?.message },
+    { name: 'description', label: 'Description', required: true, error: errors.description?.message }
+  ];
+
+  return (
+    <ModalWrapper 
+      open={open} 
+      handleClose={handleClose} 
+      title="Add Recipe" 
+      onSubmit={handleSubmit(onSubmit)} 
+      submitText="Add Recipe"
+    >
+      <form>
+        <FormFields
+          fields={fields}
+          register={register}
+          errors={errors}
+        />
+        <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: '#ff5722' }}>
+          Ingredients
+        </Typography>
+        {ingredientFields.map((field, index) => (
+          <Box key={field.id} display="flex" alignItems="center" mb={2}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label={`Ingredient ${index + 1}`}
+              {...register(`ingredients.${index}` as const)}
+              error={!!errors.ingredients?.[index]}
+              helperText={errors.ingredients?.[index]?.message}
+              sx={{
+                '& .MuiInputBase-root': {
+                  borderColor: theme.palette.primary.main,
+                },
+              }}
+            />
+            <IconButton onClick={() => remove(index)} edge="end" aria-label="remove" size="large" sx={{ color: theme.palette.error.main }}>
+              <RemoveIcon />
+            </IconButton>
+          </Box>
+        ))}
+        <Button 
+          type="button" 
+          variant="contained" 
+          color="primary" 
+          onClick={() => append('')} 
+          startIcon={<AddIcon />}
+          sx={{ mt: 2, backgroundColor: '#ff5722', '&:hover': { backgroundColor: '#e64a19' } }} // Custom hover effect
+        >
+          Add Ingredient
+        </Button>
+        <TextField 
+          fullWidth 
+          margin="normal" 
+          label="Instructions" 
+          multiline 
+          rows={4} 
+          {...register('instructions')} 
+          error={!!errors.instructions} 
+          helperText={errors.instructions?.message} 
+          sx={{
+            '& .MuiInputBase-root': {
+              borderColor: theme.palette.primary.main,
+            },
+          }}
+        />
+      </form>
+    </ModalWrapper>
+  );
+};
+
+export default AddRecipe;
+// Source: components\AppBar.tsx
+import { AppBar, Box, Toolbar, Container, Button, Typography, Fab } from '@mui/material';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import Login from './Login';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../models/User';
+import AddRecipe from './AddRecipe';
+import useModal from '../hooks/useModal';
+import { primaryColor } from '../theme/theme';
+
+const AppNavBar = () => {
+  const { user } = useContext(UserContext);
+  const { isOpen, openModal, closeModal } = useModal();
+  const pages = ['Home', 'About', 'Recipes'];
+  
+  return (
+    <>
+      <AppBar position="fixed" sx={{ backgroundColor: 'white', zIndex: 1201 }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <RestaurantMenuIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,color:primaryColor }} />
+            <Typography variant="h6" component="div" sx={{ flexGrow: 0.1, color: primaryColor }}>
+              Recipes App
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-start' }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  component={Link}
+                  to={`/${page.toLowerCase()}`}
+                  sx={{ 
+                    textTransform: 'none',              
+                    display: 'block', 
+                    mx: 2, 
+                    fontWeight: 'bold', 
+                    backgroundColor: 'transparent', 
+                    boxShadow: 'none', 
+                    color: 'black' 
+                  }}
+                >
+                  {page}
+                </Button>
+              ))}
+              {user.id !== 0 && (
+                <Button
+                  onClick={openModal}          
+                  color="secondary"
+                  sx={{  textTransform: 'none',              
+                    display: 'block', 
+                    mx: 2, 
+                    fontWeight: 'bold', 
+                    backgroundColor: 'transparent', 
+                    boxShadow: 'none', 
+                    color: 'black'   }}
+                >
+                  Add Recipe
+                </Button>             
+              )}
+            </Box>
+            <Login />
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <AddRecipe open={isOpen} handleClose={closeModal} />
+    </>
+  );
+};
+
+export default AppNavBar;
+// Source: components\AppLayout.tsx
+import { Outlet } from "react-router"
+import AppNavBar from "./AppBar"
+import Footer from "./Footer"
+
+const AppLayout = () => {
+    return (
+    <>
+        <AppNavBar  />
+      
+        <Outlet />
+        <Footer />
+    </>
+    )
+}
+
+export default AppLayout
+// Source: components\AppRoutes.tsx
+
+import { createBrowserRouter } from 'react-router-dom';
+import About from './About';
+import AppLayout from './AppLayout';
+import HomePage from './Home';
+import RecipeList from './RecipeList';
+
+export const router = createBrowserRouter([
+    {
+        path: '/', element: <AppLayout />,
+        errorElement: <h1>error</h1>,
+        children: [
+            { path: '/', element: <HomePage /> },
+            { path: '/home', element: <HomePage /> },
+            { path: 'about', element: <About /> },
+            { path: 'recipes', element: <RecipeList /> },
+        ]
+    },
+])
+// Source: components\AuthButtons.tsx
+import { Box, Button } from '@mui/material';
+import { primaryColor } from '../theme/theme';
+
+interface AuthButtonsProps {
+    handleOpen: (isSignUp: boolean) => void;
+}
+
+const AuthButtons = ({ handleOpen }: AuthButtonsProps) => {
+    
+    const buttonStyles = {
+        width: '110px',
+        fontWeight: 'bold',
+        textTransform: 'none',
+        boxShadow: '0px',
+        border: '0px',
+        transition: 'all 0.3s ease-in-out',
+    };
+    
+    return (
+        <>
+        <Box>
+            <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => handleOpen(true)}
+                sx={{
+                    ...buttonStyles,
+                }}
+            >
+                Sign Up
+            </Button>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleOpen(false)}
+                sx={{
+                    ...buttonStyles,
+                    borderRadius: '50px',
+                    padding: '10px 10px',
+                    backgroundColor: primaryColor,
+                }}
+            >
+                Log In
+            </Button>
+        </Box>
+        </>
+    );
+};
+
+export default AuthButtons;
+// Source: components\EditProfile.tsx
+import {Button, TextField } from '@mui/material';
+import { FormEvent, useContext, useEffect, useState } from 'react';
+import '../styles.css';
+import { initialState, UserContext } from "../models/User";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { update } from '../services/userAPI';
+import ModalWrapper from './ModalWrapper';
+
+const EditProfile = ({ open, handleClose }: { open: boolean; handleClose: () => void; }) => {
+    const { user, userDispatch } = useContext(UserContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        address: '',
+        phoneNumber: ''
+    });
+
+    useEffect(() => {
+        if (user !== initialState) {
+            setFormData({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                email: user.email || '',
+                address: user.address || '',
+                phoneNumber: user.phoneNumber || '',
+                password: ''
+            });
+        }
+    }, [user]);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    }
+
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault();
+        try {
+            const result = await update({ ...user, ...formData });
+            if (result) {
+                userDispatch({ type: 'UPDATE', data: { ...formData, id: user.id } });
+            }
+        } catch (error) {
+            console.error('Update failed', error);
+        }
+        setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            address: '',
+            phoneNumber: ''
+        });
+        handleClose();
+    };
+
+    const handleChange = (event: { target: { name: any; value: any; }; }) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    }
+
+    return (
+        <>
+            <ModalWrapper open={open} handleClose={handleClose} title="Edit Profile" onSubmit={handleSubmit} submitText="Save">
+                <TextField name='firstName' label="First Name" variant="outlined" fullWidth margin="normal" value={formData.firstName} onChange={handleChange} />
+                <TextField name='lastName' label="Last Name" variant="outlined" fullWidth margin="normal" value={formData.lastName} onChange={handleChange} />
+                <TextField name='email' label="Email" variant="outlined" fullWidth type="email" margin="normal" value={formData.email} onChange={handleChange} />
+                <TextField name='address' label="Address" variant="outlined" fullWidth margin="normal" value={formData.address} onChange={handleChange} />
+                <TextField name='phoneNumber' label="Phone Number" variant="outlined" fullWidth margin="normal" value={formData.phoneNumber} onChange={handleChange} />
+                <TextField name='password' label="Password" variant="outlined" fullWidth required margin="normal" value={formData.password} onChange={handleChange} InputProps={{ endAdornment: (<Button onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>{showPassword ? <VisibilityOff /> : <Visibility />}</Button>) }} type={showPassword ? "text" : "password"} />
+            </ModalWrapper>
+        </>
+    );
+}
+export default EditProfile;
+// Source: components\EditRecipe.tsx
+//  import { useContext, useEffect, useState } from "react";
+// import { AppDispatch } from "../store/store";
+// import { fetchData, RecipeType, updateRecipe } from "../store/recipesSlice";
+// import { useDispatch } from "react-redux";
+// import { UserContext } from "../models/User";
+// import { Box, Button, IconButton, TextField, Typography, Paper } from "@mui/material";
+// import RemoveIcon from '@mui/icons-material/Remove';
+// import AddIcon from '@mui/icons-material/Add';
+// import { array, object, string } from "yup";
+// import { useFieldArray, useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import ModalWrapper from "./ModalWrapper";
+// import FormFields from "./FormFields";
+// import { useTheme } from '@mui/material/styles';
+
+// const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose: () => void; recipe: RecipeType; }) => {
+//   const theme = useTheme();
+//   const { user } = useContext(UserContext);
+//   const [forbidden, setForbidden] = useState(false);
+
+//   const validationSchema = object().shape({
+//     title: string().required('Title is required'),
+//     description: string().required('Description is required'),
+//     ingredients: array().of(string().required('Ingredient is required'))
+//       .min(1, 'At least one ingredient is required'),
+//     instructions: string().required('Instructions are required'),
+//   });
+
+//   const { register, handleSubmit, formState: { errors }, control, reset } = useForm<RecipeType>({
+//     resolver: yupResolver(validationSchema),
+//   });
+
+//   const { fields: ingredientFields, append, remove } = useFieldArray({
+//     control,
+//     name: "ingredients"
+//   });
+
+//   useEffect(() => {
+//     if (recipe) {
+//       reset(recipe);
+//       setForbidden(recipe.authorId !== user.id);
+//     }
+//   }, [recipe, reset, user.id]);
+
+//   const dispatch = useDispatch<AppDispatch>();
+
+//   const onSubmit = (data: RecipeType) => {
+//     const recipeToUpdate = {
+//       ...data,
+//       authorId: user.id,
+//     };
+//     dispatch(updateRecipe(recipeToUpdate));
+//     reset();
+//     dispatch(fetchData());
+//     handleClose();
+//   };
+
+//   const fields = [
+//     { name: 'title', label: 'Title', required: true, error: errors.title?.message },
+//     { name: 'description', label: 'Description', required: true, error: errors.description?.message }
+//   ];
+
+//   if (forbidden) {
+//     return (
+//       <Paper elevation={3} sx={{ padding: 2, textAlign: 'center', backgroundColor: theme.palette.grey[200] }}>
+//         <Typography variant="h6" color="error">Forbidden: You do not have permission to edit this recipe.</Typography>
+//       </Paper>
+//     );
+//   }
+
+//   return (
+//     <ModalWrapper 
+//       open={open} 
+//       handleClose={handleClose} 
+//       title="Edit Recipe" 
+//       onSubmit={handleSubmit(onSubmit)} 
+//       submitText="Update Recipe"
+//     >
+//       <form>
+//         <FormFields
+//           fields={fields}
+//           register={register}
+//           errors={errors}
+//         />
+//         <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: theme.palette.primary.main }}>
+//           Ingredients
+//         </Typography>
+//         {ingredientFields.map((field, index) => (
+//           <Box key={field.id} display="flex" alignItems="center" mb={2}>
+//             <TextField
+//               fullWidth
+//               margin="normal"
+//               label={`Ingredient ${index + 1}`}
+//               {...register(`ingredients.${index}` as const)}
+//               error={!!errors.ingredients?.[index]}
+//               helperText={errors.ingredients?.[index]?.message}
+//               sx={{
+//                 '& .MuiInputBase-root': {
+//                   borderColor: theme.palette.primary.main,
+//                 },
+//               }}
+//             />
+//             <IconButton onClick={() => remove(index)} edge="end" aria-label="remove" size="large" sx={{ color: theme.palette.error.main }}>
+//               <RemoveIcon />
+//             </IconButton>
+//           </Box>
+//         ))}
+//         <Button 
+//           type="button" 
+//           variant="contained" 
+//           color="primary" 
+//           onClick={() => append('')} 
+//           startIcon={<AddIcon />}
+//           sx={{ mt: 2, backgroundColor: theme.palette.secondary.main, '&:hover': { backgroundColor: theme.palette.secondary.dark } }} 
+//         >
+//           Add Ingredient
+//         </Button>
+//         <TextField 
+//           fullWidth 
+//           margin="normal" 
+//           label="Instructions" 
+//           multiline 
+//           rows={4} 
+//           {...register('instructions')} 
+//           error={!!errors.instructions} 
+//           helperText={errors.instructions?.message} 
+//           sx={{
+//             '& .MuiInputBase-root': {
+//               borderColor: theme.palette.primary.main,
+//             },
+//           }}
+//         />
+//       </form>
+//     </ModalWrapper>
+//   );
+// };
+
+// export default EditRecipe;
+import { useContext, useEffect, useState } from "react";
+import { AppDispatch } from "../store/store";
+import { fetchData, RecipeType, updateRecipe } from "../store/recipesSlice";
+import { useDispatch } from "react-redux";
+import { UserContext } from "../models/User";
+import { Box, Button, IconButton, TextField, Typography, Paper } from "@mui/material";
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { array, object, string } from "yup";
+import { useFieldArray, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ModalWrapper from "./ModalWrapper";
+import FormFields from "./FormFields";
+import { useTheme } from '@mui/material/styles';
+
+const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose: () => void; recipe: RecipeType; }) => {
+  const theme = useTheme();
+  const { user } = useContext(UserContext);
+  
+  const validationSchema = object().shape({
+    title: string().required('Title is required'),
+    description: string().required('Description is required'),
+    ingredients: array().of(string().required('Ingredient is required'))
+      .min(1, 'At least one ingredient is required'),
+    instructions: string().required('Instructions are required'),
+  });
+
+  const { register, handleSubmit, formState: { errors }, control, reset } = useForm<RecipeType>({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const { fields: ingredientFields, append, remove } = useFieldArray({
+    control,
+    name: "ingredients"
+  });
+
+  useEffect(() => {
+    if (recipe) {
+       
+      reset(recipe);
+    }
+  }, [recipe, reset, user.id]);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onSubmit = (data: RecipeType) => {
+    const recipeToUpdate = {
+      ...data,
+      authorId: user.id,
+    };
+    dispatch(updateRecipe(recipeToUpdate));
+    reset();
+    dispatch(fetchData());
+    handleClose();
+  };
+
+
+
+  return (
+    <>
+    
+    
+     <ModalWrapper 
+      open={open } 
+      handleClose={handleClose} 
+      title="Edit Recipe" 
+      onSubmit={handleSubmit(onSubmit)} 
+      submitText="Update Recipe"
+    >
+      
+      <form>
+        <FormFields
+          fields={[
+            { name: 'title', label: 'Title', required: true, error: errors.title?.message },
+            { name: 'description', label: 'Description', required: true, error: errors.description?.message }
+          ]}
+          register={register}
+          errors={errors}
+        />
+        <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: theme.palette.primary.main }}>
+          Ingredients
+        </Typography>
+        {ingredientFields.map((field, index) => (
+          <Box key={field.id} display="flex" alignItems="center" mb={2}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label={`Ingredient ${index + 1}`}
+              {...register(`ingredients.${index}` as const)}
+              error={!!errors.ingredients?.[index]}
+              helperText={errors.ingredients?.[index]?.message}
+              sx={{
+                '& .MuiInputBase-root': {
+                  borderColor: theme.palette.primary.main,
+                },
+              }}
+            />
+            <IconButton onClick={() => remove(index)} edge="end" aria-label="remove" size="large" sx={{ color: theme.palette.error.main }}>
+              <RemoveIcon />
+            </IconButton>
+          </Box>
+        ))}
+        <Button 
+          type="button" 
+          variant="contained" 
+          color="primary" 
+          onClick={() => append('')} 
+          startIcon={<AddIcon />}
+          sx={{ mt: 2, backgroundColor: theme.palette.secondary.main, '&:hover': { backgroundColor: theme.palette.secondary.dark } }} 
+        >
+          Add Ingredient
+        </Button>
+        <TextField 
+          fullWidth 
+          margin="normal" 
+          label="Instructions" 
+          multiline 
+          rows={4} 
+          {...register('instructions')} 
+          error={!!errors.instructions} 
+          helperText={errors.instructions?.message} 
+          sx={{
+            '& .MuiInputBase-root': {
+              borderColor: theme.palette.primary.main,
+            },
+          }}
+        />
+      </form>
+   
+    </ModalWrapper>
+    </>
+  );
+};
+
+export default EditRecipe;
+// Source: components\Footer.tsx
+import React from 'react';
+import { Box, Typography, Link } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import { styled } from '@mui/material/styles';
+
+const FooterContainer = styled(Box)(({ theme }) => ({
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: '#333',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between', 
+    padding: '10px 20px',
+    zIndex: 2000,
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    color: 'inherit', 
+}));
+
+const FooterText = styled(Typography)(({ theme }) => ({
+    flexGrow: 1,
+    textAlign: 'center', 
+}));
+
+const Footer = () => {
+    return (
+        <FooterContainer>
+            <StyledLink href="https://github.com/Zipora5572" target="_blank">
+                <GitHubIcon fontSize="small" />
+            </StyledLink>
+            <FooterText variant="body2">
+                © 2025 Recipes App. All rights reserved.
+            </FooterText>
+        </FooterContainer>
+    );
+};
+
+export default Footer;
+// Source: components\FormFields.tsx
+
+import { TextField, Box } from '@mui/material';
+import React from 'react';
+import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+
+interface Field {
+  name: string;
+  label: string;
+  type?: string;
+  value?: string;
+  required?: boolean;
+  error?: string;
+}
+
+interface FormFieldsProps {
+  fields: Field[];
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  showPassword?: boolean;
+  handleClickShowPassword?: () => void;
+  handleMouseDownPassword?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const FormFields = ({
+  fields,
+  register,
+  errors,
+  handleChange,
+  showPassword,
+  handleClickShowPassword,
+  handleMouseDownPassword,
+}: FormFieldsProps) => {
+  const getHelperText = (name: string) => {
+    const error = errors[name];
+    if (error) {
+      if ('message' in error) {
+        return error.message as string;
+      }
+    }
+    return undefined;
+  };
+
+  return (
+    <Box>
+      {fields.map((field) => (
+        <Box key={field.name} display="flex" alignItems="center" mb={2}>
+          <TextField
+            {...register(field.name)}
+            label={field.label}
+            variant="outlined"
+            fullWidth
+            required={field.required}
+            type={field.type === 'password' && showPassword !== undefined ? (showPassword ? 'text' : 'password') : field.type}
+            margin="normal"
+            value={field.value}
+            onChange={handleChange}
+            error={!!errors[field.name]}
+            helperText={getHelperText(field.name)}
+            sx={{
+              '& .MuiInputBase-root': {
+                borderRadius: '8px',
+              },
+            }}
+          />
+        </Box>
+      ))}
+    </Box>
+  );
+};
+
+export default FormFields;
+// Source: components\Home.tsx
+import React from 'react';
+import { Box, Typography, Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+    position: 'relative',
+    textAlign: 'center',
+    height: '100vh',
+    width: '100%',
+    padding: 0,
+    margin: 0,
+}));
+
+const BackgroundImage = styled(Box)(({ theme }) => ({
+    position: 'fixed',
+    top: '68px',
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundImage: `url('/תמונה.png')`,
+    backgroundSize: 'cover',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    opacity: 0.3,
+    zIndex: 1,
+}));
+
+const Content = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    top: '50%',
+    left: '50%',
+    fontWeight: 'bold',
+    zIndex: 2,
+    color: 'black',
+}));
+
+const Home = () => {
+    return (
+        <StyledContainer>
+            <BackgroundImage />
+            <Content>
+                <Typography variant="h4" component="h1" gutterBottom style={{ fontWeight: 'bold' }}>
+                    Welcome to the Recipes App! 
+                </Typography>
+                <Typography variant="h6" component="h2" gutterBottom style={{ fontWeight: 'bold' }}>
+                    Discover Delicious Recipes
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    Browse through a variety of recipes, share your own, and enjoy cooking delicious meals from around the world! 
+                </Typography>
+            </Content>
+        </StyledContainer>
+    );
+};
+
+export default Home;
+// Source: components\Login.tsx
+import { Button, Typography, Box } from '@mui/material';
+import { useContext, useState } from 'react';
+import '../styles.css';
+import { initialState, UserContext, UserType } from "../models/User";
+import { useNavigate } from 'react-router-dom';
+import { login, signUp } from '../services/userAPI';
+import UserProfile from './UserProfile';
+import useModal from '../hooks/useModal';
+import ModalWrapper from './ModalWrapper';
+import AuthButtons from './AuthButtons';
+import FormFields from './FormFields';
+import { FieldValues, useForm, UseFormRegister } from 'react-hook-form';
+
+interface FormData {
+    email: string;
+    password: string;
+}
+
+const Login = () => {
+    const [isSignUp, setIsSignUp] = useState(true);
+    const { user, userDispatch } = useContext(UserContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const { isOpen, openModal, closeModal } = useModal();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
+
+    const handleOpen = (isSignUp: boolean) => {
+        setIsSignUp(isSignUp);
+        openModal();
+    }
+
+    const handleClose = () => {
+        if (user !== initialState) {
+            navigate('/home');
+        }
+        closeModal();
+    }
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    }
+
+    const onSubmit = async (data: Partial<UserType>) => {
+        try {
+            let result;
+            if (isSignUp) {
+                result = await signUp(data);
+                if (result) {
+                    userDispatch({ type: 'REGISTER', data: { ...data, id: result.userId } });
+                }
+            } else {
+                result = await login(data);
+                if (result) {
+                    userDispatch({ type: 'LOGIN', data: result.user });
+                }
+            }
+        } catch (error) {
+            console.error(isSignUp ? 'Registration failed' : 'Login failed', error);
+        }
+        reset();
+        handleClose();
+    };
+    const fields = [
+        { name: 'email', label: 'Email', type: 'email', required: true },
+        { name: 'password', label: 'Password', type: 'password', required: true }
+    ];
+    return (
+        <>
+            {user !== initialState && <UserProfile />}
+           {user === initialState && <AuthButtons handleOpen={handleOpen} />}
+            <ModalWrapper
+                open={isOpen}
+                handleClose={handleClose}
+                title={isSignUp ? 'Sign Up' : 'Sign In'}
+                onSubmit={handleSubmit(onSubmit)}
+                submitText={isSignUp ? 'Sign Up' : 'Sign In'}
+            >
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <FormFields
+                        fields={fields}
+                        register={register as unknown as UseFormRegister<FieldValues>}
+                        errors={errors}
+                        showPassword={showPassword}
+                        handleClickShowPassword={handleClickShowPassword}
+                        handleMouseDownPassword={handleMouseDownPassword}
+                    />
+                    <Box  display="flex" alignItems="center" >
+                        <Typography>
+                            {isSignUp ? 'Already have an account?' : 'Don\'t have an account?'}
+                        </Typography>
+                        <Button onClick={() => setIsSignUp(!isSignUp)} sx={{ textTransform: 'none',color:'#3f3ff2' }}>
+                            {isSignUp ? 'Sign in' : 'Sign up'}
+                        </Button>
+                    </Box>
+                </form>
+            </ModalWrapper>
+        </>
+    );
+};
+export default Login;
+// Source: components\ModalWrapper.tsx
+import React from 'react';
+import { Box, Modal, Typography, Button } from '@mui/material';
+import { primaryColor } from '../theme/theme';
+
+interface ModalWrapperProps {
+  open: boolean;
+  handleClose: () => void;
+  title: string;
+  children: React.ReactNode;
+  onSubmit?: () => void;
+  submitText?: string;
+}
+
+const ModalWrapper = ({ open, handleClose, title, children, onSubmit, submitText }: ModalWrapperProps) => {
+  const buttonStyles = {
+    padding: '10px 0',
+    fontWeight: 'bold',
+    transition: 'all 0.3s ease-in-out',
+    width: '100%', 
+  };
+
+  return (
+    <Modal open={open} onClose={handleClose}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 500,
+          bgcolor: 'background.paper',
+          border: `2px solid ${primaryColor}`,
+          boxShadow: 24,
+          p: 4,
+          borderRadius: '12px',
+          maxHeight: '80vh',
+          overflowY: 'auto',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }}
+       
+      >
+        <Button
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            minWidth: 'auto',     
+            color: 'red',
+            fontSize:'20px',
+           
+          }}
+        >
+          X
+        </Button>
+        <Typography variant="h6" component="h2" gutterBottom sx={{ color: primaryColor }}>
+          {title}
+        </Typography>
+        {children}
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={onSubmit}
+          sx={{
+            ...buttonStyles,
+            border: `2px solid ${primaryColor}`,
+            color: primaryColor,
+            mt: 2, 
+            '&:hover': {
+              backgroundColor: primaryColor,
+              color: 'white',
+            },
+          }}
+        >
+          {submitText || 'Submit'}
+        </Button>
+      </Box>
+    </Modal>
+  );
+};
+
+export default ModalWrapper;
+// Source: components\RecipeCard.tsx
+import { Card, CardContent, Typography, ListItemButton, List, ListItemText, useTheme, Button, IconButton } from '@mui/material';
+import { AccessAlarm, EmojiFoodBeverage, LocalDining, CheckCircle, Description, Assignment } from '@mui/icons-material';
+import { primaryColor } from '../theme/theme';
+
+const RecipeCard = ({ recipe }: { recipe: any }) => {
+  const theme = useTheme();
+  
+  return (
+    <Card 
+      variant="outlined" 
+      sx={{ 
+        borderColor: primaryColor,
+        height: '75vh',
+        width: '75vw', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        borderRadius: '12px',
+        boxShadow: theme.shadows[5],
+        backgroundColor: '#ffffff',
+        padding: '16px',
+        overflowY: 'auto',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '&::-moz-scrollbar': {
+          display: 'none',
+        }
+      }}
+    >
+      <CardContent>
+       
+        <Typography variant="h4" component="div" sx={{ color: primaryColor, fontWeight: 'bold', textAlign: 'center' }}>
+          <EmojiFoodBeverage sx={{ verticalAlign: 'middle', marginRight: '8px' }} />
+          {recipe.title}
+          
+        </Typography>
+        <Typography variant="h6" component="div" sx={{ marginTop: '8px', color: theme.palette.text.secondary }}>
+          <AccessAlarm sx={{ verticalAlign: 'middle', marginRight: '4px' }} />
+          Cooking Time: {recipe.cookingTime ?? 10} minutes
+        </Typography>
+        
+        <Typography variant="h6" component="div" sx={{ marginTop: '16px', color: primaryColor, borderBottom: '2px solid #ff5722', paddingBottom: '4px' }}>
+          <Description sx={{ verticalAlign: 'middle', marginRight: '4px' }} />
+          Description
+        </Typography>
+
+        <Typography variant="body1" sx={{ color: theme.palette.text.primary, marginBottom: '16px' }}>
+          {recipe.description}
+        </Typography>
+        
+        <Typography variant="h6" component="div" sx={{ marginTop: '16px', color: primaryColor, borderBottom: '2px solid #ff5722', paddingBottom: '4px' }}>
+          <LocalDining sx={{ verticalAlign: 'middle', marginRight: '4px',paddingBottom: '4px' }} />
+          Ingredients
+        </Typography>
+        <List>
+          {(recipe.ingredients || []).map((ingredient: string, index: number) => (
+            <ListItemButton key={index} sx={{ backgroundColor: 'transparent', borderRadius: '4px', margin: '4px 0', '&:hover': { backgroundColor: '#ffe0e0' } }}>
+              <CheckCircle sx={{ color: primaryColor, marginRight: '8px' }} />
+              <ListItemText primary={ingredient} sx={{ color: theme.palette.text.primary }} />
+            </ListItemButton>
+          ))}
+        </List>
+        
+        <Typography variant="h6" component="div" sx={{ marginTop: '16px', color: primaryColor, borderBottom: '2px solid #ff5722', paddingBottom: '4px' }}>
+          <Assignment sx={{ verticalAlign: 'middle', marginRight: '4px' }} />
+          Instructions
+        </Typography>
+        <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
+          {recipe.instructions}
+        </Typography>
+        
+      </CardContent>
+    </Card>
+  );
+};
+
+export default RecipeCard;
+// Source: components\RecipeList.tsx
+import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, StoreType } from '../store/store';
+import { deleteRecipe, fetchData } from '../store/recipesSlice';
+import { List, ListItemText, Container, Box, Drawer, ListItemButton, useTheme, Typography, CircularProgress, IconButton } from '@mui/material';
+import { RecipeType } from '../models/Recipe';
+import RecipeCard from './RecipeCard';
+import Search from './Search'; 
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditRecipe from './EditRecipe';
+import useModal from '../hooks/useModal';
+import { UserContext } from '../models/User';
+
+const RecipeList = () => {
+  const recipes = useSelector((state: StoreType) => state.recipes.list);
+  const loading = useSelector((state: StoreType) => state.recipes.loading);
+  const dispatch = useDispatch<AppDispatch>();
+  const [selectedRecipe, setSelectedRecipe] = useState<RecipeType|null >(null);
+  const [searchQuery, setSearchQuery] = useState<string>(''); 
+  const theme = useTheme();
+  const { isOpen, openModal, closeModal } = useModal();
+  const { user } = useContext(UserContext);
+
+  // const [editModalOpen, setEditModalOpen] = useState<boolean>(false); 
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  const filteredRecipes = recipes.filter(recipe => 
+    recipe.title?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+const checkPermission=(recipe:RecipeType)=>{
+  console.log(user.id,recipe.authorId);
+  
+  setSelectedRecipe(recipe)
+  if(user.id==recipe.authorId)
+return true
+  alert("Forbidden : You do not have permission")
+  return false
+}
+
+ const handleDelete = (recipe:RecipeType) => {
+if(checkPermission(recipe))
+   if (selectedRecipe) {
+     dispatch(deleteRecipe(selectedRecipe.id));
+   }
+ };
+  return (
+    <>
+      {loading && <CircularProgress />}
+      <Container sx={{ py: 8, padding: 0 }}>
+        <Box sx={{ display: 'flex' }}>
+          <Drawer
+            sx={{
+              width: 300,
+              '& .MuiDrawer-paper': {
+                width: 320,
+                marginTop: '70px',
+                bgcolor: theme.palette.background.paper,
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+                '-ms-overflow-style': 'none', 
+                'scrollbar-width': 'none', 
+                borderRight: `1px solid ${theme.palette.divider}`,
+              },
+            }}
+            variant='permanent'
+          >
+            <Box sx={{ p: 2, height: '100%' }}>
+              <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> 
+              <List>
+                {filteredRecipes.map(recipe => (
+                  <ListItemButton 
+                    key={recipe.id} 
+                    onClick={() => setSelectedRecipe(recipe)}
+                    sx={{
+                      backgroundColor: theme.palette.action.hover,
+                      borderRadius: '8px',
+                      margin: '8px 0',
+                      transition: 'background-color 0.3s, transform 0.2s',
+                      '&:hover': {
+                        backgroundColor: '#ffccbc', 
+                      },
+                    }}
+                  >
+                    <ListItemText 
+                      primary={recipe.title} 
+                      sx={{
+                        fontWeight: 'bold',
+                        color: theme.palette.text.primary,
+                        textAlign: 'center'
+                      }} 
+                    />
+                    <IconButton 
+                      onClick={() =>{checkPermission(recipe)?openModal():{}} } 
+                      sx={{ marginLeft: 1 }} 
+                      aria-label="edit recipe"
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => {handleDelete(recipe)}} >                    
+                        <DeleteIcon />
+                    </IconButton>
+                  </ListItemButton>
+                ))}
+              </List>
+            </Box>
+          </Drawer>
+          <Box sx={{ flexGrow: 1, p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {selectedRecipe ? 
+              <RecipeCard recipe={selectedRecipe} /> :
+              <Box sx={{ flexGrow: 1, p: 2, width: '62vw', textAlign: 'center', padding: 4, bgcolor: theme.palette.background.default, borderRadius: '8px' }}>
+                <Typography variant="h3" color={theme.palette.primary.main} gutterBottom>
+                  Your Recipe Book
+                </Typography>
+                <Typography variant="body1" color="text.secondary" paragraph>
+                  Select a recipe from the list to view its details
+                </Typography>
+                <img src="/תמונה.png"  alt="Cooking Illustration"  style={{ width: '75%', borderRadius: '8px' }} />
+              </Box>
+            }
+          </Box>
+        </Box>
+      </Container>
+        <EditRecipe 
+        open={isOpen} 
+        handleClose={closeModal} 
+        recipe={selectedRecipe} 
+      />
+    </>
+  );
+};
+export default RecipeList;
+// Source: components\Search.tsx
+import { InputAdornment, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+
+interface SearchBarProps {
+    searchQuery: string;
+    setSearchQuery: (query: string) => void;
+}
+
+const Search = ({ searchQuery, setSearchQuery }: SearchBarProps) => {
+    return (
+        <>
+            <TextField
+                variant="outlined"
+                placeholder="Search recipes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                fullWidth
+                sx={{ marginBottom: 2 }}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+
+            />
+        </>
+    );
+};
+
+export default Search;
+// Source: components\UserMenu.tsx
+import { Menu, MenuItem, ListItemIcon, Divider } from '@mui/material';
+import { Settings, Logout } from '@mui/icons-material';
+
+interface UserMenuProps {
+    anchorEl: null | HTMLElement;
+    open: boolean;
+    handleClose: () => void;
+    handleEdit: () => void;
+    handleLogout: () => void;
+}
+
+const UserMenu = ({ anchorEl, open, handleClose, handleEdit, handleLogout }: UserMenuProps) => {
+    return (
+        <>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                    elevation: 0,
+                    sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                        },
+                        '&::before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                        },
+                    },
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+                <Divider />
+                <MenuItem onClick={handleEdit}>
+                    <ListItemIcon>
+                        <Settings fontSize="small" />
+                    </ListItemIcon>
+                    Edit Profile
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                    <ListItemIcon>
+                        <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                </MenuItem>
+            </Menu>
+        </>
+    );
+};
+
+export default UserMenu;
+// Source: components\UserProfile.tsx
+import { Box, IconButton, Tooltip, Avatar } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { UserContext } from "../models/User";
+import EditProfile from './EditProfile';
+import UserMenu from './UserMenu';
+import useModal from '../hooks/useModal';
+
+const UserProfile = () => {
+  const { user, userDispatch } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { isOpen, openModal, closeModal } = useModal();
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    userDispatch({ type: 'LOG_OUT' });
+  };
+
+  const handleEdit = () => {
+    openModal();
+  };
+
+  return (
+    <>
+      <Box>
+        <Tooltip title={user?.firstName ? `Hello ${user.firstName}` : `Hello ${user.email}`}>
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ 
+              p: 0, 
+              '&:hover': {
+                backgroundColor: 'rgba(255, 87, 34, 0.1)', 
+              }
+            }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar 
+              sx={{ 
+                bgcolor: 'primary.main', 
+                color: 'white', 
+                width: 40, 
+                height: 40, 
+              }}
+            >
+              {user.firstName.charAt(0).toUpperCase()}
+            </Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+
+      <UserMenu
+        anchorEl={anchorEl}
+        open={open}
+        handleClose={handleClose}
+        handleEdit={handleEdit}
+        handleLogout={handleLogout}
+      />
+
+      <EditProfile open={isOpen} handleClose={closeModal} />
+    </>
+  );
+};
+
+export default UserProfile;
+// Source: hooks\useModal.tsx
+import { useState } from 'react';
+
+const useModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => {
+
+    setIsOpen(false)
+  };
+
+  return {
+    isOpen,
+    openModal,
+    closeModal,
+  };
+};
+
+export default useModal;
+// Source: index.css
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+ 
+  button {
+    background-color: #f9f9f9;
+  }
+}
+// Source: main.tsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+// Source: models\Recipe.ts
+
+
+export type RecipeType = {
+    id: number,
+    title: string,
+    description: string,
+    authorId: number,
+    ingredients: string[],
+    instructions: string,
+ 
+}
+// Source: models\User.ts
+import { createContext, Dispatch } from "react"
+import { login, register, update } from "../services/userAPI"
+
+export type UserType = {
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    address: string,
+    phoneNumber: string
+}
+
+type PartialWithRequiredFields<T, K extends keyof T> = Partial<T> & Pick<T, K>;
+
+type Action = {
+    type: 'REGISTER',
+    data: Partial<UserType>
+} | {
+    type: 'LOGIN'
+    data: Partial<UserType>
+} | {
+    type: 'LOG_OUT'
+
+} | {
+    type: 'GET_USER'
+
+} | {
+    type: 'UPDATE',
+    data: PartialWithRequiredFields<UserType, 'email' | 'password'>;
+}
+
+
+export const initialState: UserType = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    address: '',
+    phoneNumber: ''
+}
+
+export const UserContext = createContext<{
+    user: UserType;
+    userDispatch: Dispatch<Action>;
+}>({
+    user: initialState,
+    userDispatch: () => null
+});
+
+
+
+export default (state: UserType, action: Action): UserType => {
+    switch (action.type) {
+        case 'REGISTER':
+            return {
+                ...state,
+                ...action.data, // You can add a loading state here if needed
+            };
+        case 'LOGIN':
+            return {
+                ...state,
+                ...action.data // Update with the login data
+            };
+        case 'LOG_OUT':
+            return initialState;
+        case 'UPDATE':
+            return {
+                ...state,
+                ...action.data // Update with new user data
+            };
+        default:
+            return state;
+    }
+}
+// Source: services\userAPI.ts
+import axios from 'axios';
+import { UserType } from '../models/User';
+
+const API_URL = 'http://localhost:3000/api/user';
+
+export const signUp = async (user: Partial<UserType>) => {
+    try {
+        const res = await axios.post(`${API_URL}/register`,
+            {
+                email: user.email,
+                password: user.password
+            },
+        )
+        console.log(res.data);
+        
+        return res.data;
+
+       
+    } catch (e) {
+        console.log(e);
+        if (e.status === 422)
+            alert('user already sign up')
+    }
+}
+
+export const login = async (user:Partial<UserType>) => {
+    try {
+        const res = await axios.post(`${API_URL}/login`,
+            user,
+        )
+        console.log(res.data);
+        
+        return res.data;
+     
+    } catch (e) {
+        console.log(e);
+        if (axios.isAxiosError(e) && e.response?.status === 401) {
+            alert('user not found')
+        }
+    }
+}
+
+
+export const update= async (user: Partial<UserType>) => {
+    try {
+        const res = await axios.put(`${API_URL}`,
+            user,
+         { headers: {'user-id':user.id} }
+        )
+        
+        return res.data;
+    } catch (e) {
+        console.log(e);
+        if (axios.isAxiosError(e) && e.response?.status === 401) {
+            alert('user not found')
+        }
+    }
+}
+// Source: store\recipesSlice.ts
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { RecipeType } from "../models/Recipe";
+
+export const fetchData = createAsyncThunk('recipes/fetch',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/recipes')
+            return response.data
+        }
+        catch (e) {
+            if (axios.isAxiosError(e) && e.response) {
+                if (e.response.status === 401) {
+                    return thunkAPI.rejectWithValue({ error: 'Unauthorized access' });
+                }
+                if (e.response.status === 403) {
+                    return thunkAPI.rejectWithValue({ error: 'Forbidden access' });
+                }
+            }
+            return thunkAPI.rejectWithValue({ e: e.message })
+        }
+    }
+)
+
+export const addRecipe = createAsyncThunk('recipes/add',
+    async (recipe: RecipeType, thunkAPI) => {
+        try {
+            
+            const response = await axios.post('http://localhost:3000/api/recipes', {
+                title: recipe.title,
+                description: recipe.description,
+                ingredients: recipe.ingredients,
+                instructions: recipe.instructions,
+                authorId: recipe.authorId,
+            },
+                {
+                    headers: {
+                        "user-id": recipe.authorId.toString(),
+                    }
+                }
+            )
+            return response.data
+        }
+        catch (e) {
+            return thunkAPI.rejectWithValue({ e: e.message })
+        }
+    }
+)
+
+export const updateRecipe = createAsyncThunk('recipes/update',
+    async (recipe: RecipeType, thunkAPI) => {
+        try {
+            const response = await axios.put(`http://localhost:3000/api/recipes/${recipe.id}`, recipe);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue({ e: e.message });
+        }
+    }
+);
+
+
+export const deleteRecipe = createAsyncThunk('recipes/delete',
+    async (recipeId: number, thunkAPI) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/recipes/${recipeId}`);
+            return recipeId; 
+        } catch (e) {
+            return thunkAPI.rejectWithValue({ e: e.message });
+        }
+    }
+);
+
+const recipesSlice = createSlice({
+    name: 'recipes',
+    initialState: {
+        list: [] as RecipeType[], loading: false
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchData.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchData.fulfilled, (state, action) => {
+                state.list = [...action.payload]
+                state.loading = false
+            })
+            .addCase(fetchData.rejected, (state, action) => {
+                console.log('failed to fetch data', action.payload)
+            })
+            .addCase(addRecipe.fulfilled, (state, action) => {
+                state.list = [...state.list, action.payload]
+                console.log('added recipe', action.payload);
+
+            })
+            .addCase(addRecipe.rejected, (state, action) => {
+                console.log('failed to fetch data', action.payload)
+            })
+            .addCase(updateRecipe.fulfilled, (state, action) => {
+                const index = state.list.findIndex(recipe => recipe.id === action.payload.id);
+                if (index !== -1) {
+                    state.list[index] = action.payload; 
+                }
+                console.log('updated recipe', action.payload);
+            })
+            .addCase(updateRecipe.rejected, (state, action) => {
+                console.log('failed to update recipe', action.payload);
+            })
+            .addCase(deleteRecipe.fulfilled, (state, action) => {
+                state.list = state.list.filter(recipe => recipe.id !== action.payload); // Remove deleted recipe
+                console.log('deleted recipe with id', action.payload);
+            })
+            .addCase(deleteRecipe.rejected, (state, action) => {
+                console.log('failed to delete recipe', action.payload);
+            });
+    },
+})
+
+export default recipesSlice
+// Source: store\store.ts
+import { combineSlices, configureStore } from "@reduxjs/toolkit";
+import recipesSlice from "./recipesSlice";
+
+const store = configureStore({
+    reducer: combineSlices(
+       
+        recipesSlice
+    ),
+})
+
+export type StoreType = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
+
+export default store;
+// Source: styles.css
+.box {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; 
+    border: 2px solid #000;
+    background-color: white; 
+    padding: 16px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+/* styles.css */
+.button {
+    border-radius: 50px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for the button */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+    background-color:white; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+.button.outlined {
+    border: 0.2px solid white;
+    background-color: transparent; /* Transparent background */
+    color: white; /* Text color for outlined button */
+}
+
+.button.outlined:hover {
+    background-color: white; /* Change background color on hover for outlined */
+    color:#1976d2; /* Change text color on hover for outlined */
+}
+.modal {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; 
+    border: 2px solid #000;
+    background-color: white; 
+    padding: 16px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+// Source: theme\theme.ts
+import { createTheme } from '@mui/material';
+
+export const primaryColor = '#ff5722';
+
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: primaryColor,
+        },
+        secondary: {
+            main: '#white',
+        },
+        background: {
+            default: '#white',
+            paper: '#ffffff',
+        },
+        text: {
+            primary: '#212121',
+            secondary: '#757575',
+        },
+    },
+    typography: {
+        fontFamily: 'Roboto, sans-serif',
+        h1: {
+          fontSize: '2.5rem',
+          fontWeight: 700,
+        },
+        h2: {
+          fontSize: '2rem',
+          fontWeight: 600,
+        },
+        h3: {
+          fontSize: '1.75rem',
+          fontWeight: 500,
+        },
+        body1: {
+          fontSize: '1rem',
+          fontWeight: 400,
+        },
+      },
+   
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        // backgroundColor: primaryColor,
+                        // color:'white'
+                    },
+                },
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    minHeight: '350px',
+                },
+            },
+        },
+       
+          MuiAppBar: {
+            styleOverrides: {
+              root: {
+                backgroundColor: '#white',
+              },
+            },
+          },
+          MuiDrawer: {
+            styleOverrides: {
+              paper: {
+                borderColor: '#03dac6',
+              },
+            },
+          },
+    },
+});
+
+export default theme;
+// Source: vite-env.d.ts
+/// <reference types="vite/client" />

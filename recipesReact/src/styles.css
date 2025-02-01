@@ -1,0 +1,46 @@
+.box {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; 
+    border: 2px solid #000;
+    background-color: white; 
+    padding: 16px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+/* styles.css */
+.button {
+    border-radius: 50px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for the button */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+    background-color:white; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+.button.outlined {
+    border: 0.2px solid white;
+    background-color: transparent; /* Transparent background */
+    color: white; /* Text color for outlined button */
+}
+
+.button.outlined:hover {
+    background-color: white; /* Change background color on hover for outlined */
+    color:#1976d2; /* Change text color on hover for outlined */
+}
+.modal {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; 
+    border: 2px solid #000;
+    background-color: white; 
+    padding: 16px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }

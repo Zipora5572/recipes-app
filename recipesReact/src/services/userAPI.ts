@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { UserType } from '../models/User';
+import { errorAlert } from './alerts';
 
 const API_URL = 'http://localhost:3000/api/user';
 
@@ -19,7 +20,7 @@ export const signUp = async (user: Partial<UserType>) => {
     } catch (e) {
         console.log(e);
         if (e.status === 422)
-            alert('user already sign up')
+            errorAlert("user already sign up")
     }
 }
 
@@ -35,7 +36,7 @@ export const login = async (user:Partial<UserType>) => {
     } catch (e) {
         console.log(e);
         if (axios.isAxiosError(e) && e.response?.status === 401) {
-            alert('user not found')
+          errorAlert("User not found")
         }
     }
 }
@@ -52,7 +53,7 @@ export const update= async (user: Partial<UserType>) => {
     } catch (e) {
         console.log(e);
         if (axios.isAxiosError(e) && e.response?.status === 401) {
-            alert('user not found')
+            errorAlert("User not found")
         }
     }
 }

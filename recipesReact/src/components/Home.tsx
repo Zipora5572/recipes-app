@@ -29,7 +29,6 @@ const BackgroundImage = styled(Box)(({ theme }) => ({
 const Content = styled(Box)(({ theme }) => ({
     position: 'relative',
     top: '50%',
-    left: '50%',
     fontWeight: 'bold',
     zIndex: 2,
     color: 'black',

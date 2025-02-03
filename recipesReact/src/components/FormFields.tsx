@@ -18,8 +18,6 @@ interface FormFieldsProps {
   errors: FieldErrors<FieldValues>;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   showPassword?: boolean;
-  handleClickShowPassword?: () => void;
-  handleMouseDownPassword?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const FormFields = ({
@@ -28,8 +26,6 @@ const FormFields = ({
   errors,
   handleChange,
   showPassword,
-  handleClickShowPassword,
-  handleMouseDownPassword,
 }: FormFieldsProps) => {
   const getHelperText = (name: string) => {
     const error = errors[name];

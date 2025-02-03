@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AppDispatch } from "../store/store";
-import { fetchData, RecipeType, updateRecipe } from "../store/recipesSlice";
+import { fetchData, updateRecipe } from "../store/recipesSlice";
 import { useDispatch } from "react-redux";
 import { UserContext } from "../models/User";
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
@@ -12,6 +12,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ModalWrapper from "./ModalWrapper";
 import FormFields from "./FormFields";
 import { useTheme } from '@mui/material/styles';
+import { successAlert } from "../services/alerts";
+import { RecipeType } from "../models/Recipe";
 
 const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose: () => void; recipe: RecipeType; }) => {
   const theme = useTheme();
@@ -38,6 +40,7 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
 
   const onSubmit = (data: RecipeType) => {
     dispatch(updateRecipe({ ...data, authorId: user.id }));
+    successAlert("Recipe Updated Successfully")
     reset(); dispatch(fetchData()); handleClose();
   };
 

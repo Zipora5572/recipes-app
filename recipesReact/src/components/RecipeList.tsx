@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditRecipe from './EditRecipe';
 import useModal from '../hooks/useModal';
 import { UserContext } from '../models/User';
+import { errorAlert, successAlert } from '../services/alerts';
 
 const RecipeList = () => {
   const recipes = useSelector((state: StoreType) => state.recipes.list);
@@ -31,19 +32,20 @@ const RecipeList = () => {
   const checkPermission = (recipe: RecipeType) => {
     setSelectedRecipe(recipe);
     if (user.id == recipe.authorId) return true;
-    alert("Forbidden: You do not have permission");
+    errorAlert("Forbidden: You do not have permission")
     return false;
   };
 
   const handleDelete = (recipe: RecipeType) => {
     if (checkPermission(recipe) && selectedRecipe) {
       dispatch(deleteRecipe(selectedRecipe.id));
+    successAlert( "Recipe Deleted Successfully")
     }
   };
 
   return (
     <>
-      <Container sx={{ py: 8, padding: 0 }}>
+      <Container maxWidth={false} sx={{ padding: 0,width:'80vw',height:'70%'}}>
         <Box sx={{ display: 'flex' }}>
           <Drawer sx={{
             width: 300, '& .MuiDrawer-paper': {
@@ -79,7 +81,7 @@ const RecipeList = () => {
               )}
             </Box>
           </Drawer>
-          <Box sx={{ flexGrow: 1, p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box  sx={{ flexGrow: 1, p: 2, display: 'flex', justifyContent: 'center', alignItems: 'stretch' ,width:'100%',height:'100%'}}>
             {selectedRecipe ? <RecipeCard recipe={selectedRecipe} /> : 
               <Box sx={{ flexGrow: 1, p: 2, width: '62vw', textAlign: 'center', padding: 4, bgcolor: theme.palette.background.default, borderRadius: '8px' }}>
                 <Typography variant="h3" color={theme.palette.primary.main} gutterBottom>Your Recipe Book</Typography>

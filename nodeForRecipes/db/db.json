@@ -69,8 +69,8 @@
       "id": 1738155706297,
       "email": "sss@s.s",
       "password": "s",
-      "firstName": "a",
-      "lastName": "",
+      "firstName": "afghj",
+      "lastName": "hjk",
       "address": ""
     },
     {
@@ -98,6 +98,21 @@
       "id": 1738251857489,
       "email": "",
       "password": ""
+    },
+    {
+      "id": 1738618509862,
+      "email": "ss@w",
+      "password": "w"
+    },
+    {
+      "id": 1738618600411,
+      "email": "a@aaa",
+      "password": "a"
+    },
+    {
+      "id": 1738618665681,
+      "email": "a@aa",
+      "password": "a"
     }
   ],
   "recipes": [
@@ -143,9 +158,9 @@
     },
     {
       "id": 1738446044439,
-      "title": "aa",
+      "title": "aaw",
       "description": "aaa",
-      "authorId": "1738155706297",
+      "authorId": 1738155706297,
       "ingredients": [
         "aa"
       ],

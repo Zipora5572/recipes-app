@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, ListItemButton, List, ListItemText, useTheme, Button, IconButton } from '@mui/material';
+import { Card, CardContent, Typography, ListItemButton, List, ListItemText, useTheme } from '@mui/material';
 import { AccessAlarm, EmojiFoodBeverage, LocalDining, CheckCircle, Description, Assignment } from '@mui/icons-material';
 import { primaryColor } from '../theme/theme';
 
@@ -10,8 +10,8 @@ const RecipeCard = ({ recipe }: { recipe: any }) => {
       variant="outlined" 
       sx={{ 
         borderColor: primaryColor,
-        height: '75vh',
-        width: '75vw', 
+        width: '100%', 
+        height: '100%', 
         display: 'flex', 
         flexDirection: 'column', 
         borderRadius: '12px',

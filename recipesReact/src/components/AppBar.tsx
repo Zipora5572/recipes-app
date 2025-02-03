@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, Container, Button, Typography, Fab } from '@mui/material';
+import { AppBar, Box, Toolbar, Container, Button, Typography } from '@mui/material';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import Login from './Login';
 import { Link } from 'react-router-dom';
@@ -16,8 +16,8 @@ const AppNavBar = () => {
   return (
     <>
       <AppBar position="fixed" sx={{ backgroundColor: 'white', zIndex: 1201 }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+      <Container maxWidth={false} sx={{ margin: 0 }}>
+          <Toolbar disableGutters sx={{margin:0}}>
             <RestaurantMenuIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,color:primaryColor }} />
             <Typography variant="h6" component="div" sx={{ flexGrow: 0.1, color: primaryColor }}>
               Recipes App

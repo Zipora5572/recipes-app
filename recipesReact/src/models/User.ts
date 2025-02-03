@@ -1,5 +1,4 @@
 import { createContext, Dispatch } from "react"
-import { login, register, update } from "../services/userAPI"
 
 export type UserType = {
     id: number,
@@ -56,19 +55,19 @@ export default (state: UserType, action: Action): UserType => {
         case 'REGISTER':
             return {
                 ...state,
-                ...action.data, // You can add a loading state here if needed
+                ...action.data, 
             };
         case 'LOGIN':
             return {
                 ...state,
-                ...action.data // Update with the login data
+                ...action.data 
             };
         case 'LOG_OUT':
             return initialState;
         case 'UPDATE':
             return {
                 ...state,
-                ...action.data // Update with new user data
+                ...action.data 
             };
         default:
             return state;

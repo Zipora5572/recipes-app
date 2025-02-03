@@ -2,7 +2,7 @@ import { Container, Typography } from '@mui/material';
 
 const About = () => {
     return (
-        <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh',marginLeft:'40%' }}>
+        <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Typography variant="h4" component="h1" gutterBottom align="center" color="#ff5722">
                 About Recipes App 
             </Typography>

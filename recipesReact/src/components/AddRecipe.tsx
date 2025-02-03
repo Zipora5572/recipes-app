@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppDispatch } from "../store/store";
-import { addRecipe, fetchData, RecipeType } from "../store/recipesSlice";
+import { addRecipe, fetchData } from "../store/recipesSlice";
 import { useDispatch } from "react-redux";
 import { UserContext } from "../models/User";
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ModalWrapper from "./ModalWrapper";
 import FormFields from "./FormFields";
 import { useTheme } from '@mui/material/styles';
+import { successAlert } from "../services/alerts";
 
 const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => void; }) => {
   const theme = useTheme();
@@ -33,7 +34,9 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
 
   const onSubmit = (data: Omit<RecipeType, 'id' | 'authorId'>) => {
     dispatch(addRecipe({ ...data, authorId: user.id, ingredients: data.ingredients || [] } as RecipeType));
-    reset(); dispatch(fetchData()); handleClose();
+    reset(); dispatch(fetchData());
+   successAlert("Recipe Added Successfully")
+     handleClose();
   };
 
   const fields = [
@@ -42,7 +45,7 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
   ];
 
   return (
-    <ModalWrapper open={open} handleClose={handleClose} title="Add Recipe" onSubmit={handleSubmit(onSubmit)} submitText="Add Recipe">
+    <ModalWrapper  open={open} handleClose={handleClose} title="Add Recipe" onSubmit={handleSubmit(onSubmit)} submitText="Add Recipe">
       <form>
         <FormFields fields={fields} register={register} errors={errors} />
         <Typography variant="subtitle1" component="h3" gutterBottom sx={{ color: '#ff5722' }}>Ingredients</Typography>
@@ -61,6 +64,6 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
       </form>
     </ModalWrapper>
   );
-};
+n};
 
 export default AddRecipe;

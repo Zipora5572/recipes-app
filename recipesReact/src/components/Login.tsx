@@ -19,7 +19,6 @@ interface FormData {
 const Login = () => {
     const [isSignUp, setIsSignUp] = useState(true);
     const { user, userDispatch } = useContext(UserContext);
-    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const { isOpen, openModal, closeModal } = useModal();
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
@@ -34,11 +33,6 @@ const Login = () => {
             navigate('/home');
         }
         closeModal();
-    }
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
     }
 
     const onSubmit = async (data: Partial<UserType>) => {
@@ -68,7 +62,7 @@ const Login = () => {
     return (
         <>
             {user !== initialState && <UserProfile />}
-           {user === initialState && <AuthButtons handleOpen={handleOpen} />}
+           {user === initialState && <AuthButtons  handleOpen={handleOpen} />}
             <ModalWrapper
                 open={isOpen}
                 handleClose={handleClose}
@@ -81,9 +75,6 @@ const Login = () => {
                         fields={fields}
                         register={register as unknown as UseFormRegister<FieldValues>}
                         errors={errors}
-                        showPassword={showPassword}
-                        handleClickShowPassword={handleClickShowPassword}
-                        handleMouseDownPassword={handleMouseDownPassword}
                     />
                     <Box  display="flex" alignItems="center" >
                         <Typography>

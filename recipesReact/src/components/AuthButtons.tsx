@@ -18,7 +18,7 @@ const AuthButtons = ({ handleOpen }: AuthButtonsProps) => {
     
     return (
         <>
-        <Box>
+        <Box sx={{marginRight:0}}>
             <Button
                 variant="outlined"
                 color="primary"

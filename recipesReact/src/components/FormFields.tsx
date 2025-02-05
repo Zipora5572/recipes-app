@@ -1,7 +1,7 @@
-
 import { TextField, Box } from '@mui/material';
 import React from 'react';
 import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+import { RecipeType } from '../models/Recipe';
 
 interface Field {
   name: string;
@@ -14,7 +14,7 @@ interface Field {
 
 interface FormFieldsProps {
   fields: Field[];
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<Omit<RecipeType, "id" | "authorId">>;
   errors: FieldErrors<FieldValues>;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   showPassword?: boolean;

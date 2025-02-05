@@ -13,6 +13,7 @@ import ModalWrapper from "./ModalWrapper";
 import FormFields from "./FormFields";
 import { useTheme } from '@mui/material/styles';
 import { successAlert } from "../services/alerts";
+import { RecipeType } from "../models/Recipe";
 
 const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => void; }) => {
   const theme = useTheme();
@@ -64,6 +65,6 @@ const AddRecipe = ({ open, handleClose }: { open: boolean; handleClose: () => vo
       </form>
     </ModalWrapper>
   );
-n};
+};
 
 export default AddRecipe;

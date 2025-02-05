@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, StoreType } from '../store/store';
 import { deleteRecipe, fetchData } from '../store/recipesSlice';
 import { List, ListItemText, Container, Box, Drawer, ListItemButton, useTheme, Typography, CircularProgress, IconButton } from '@mui/material';
-import { RecipeType } from '../models/Recipe';
+import { emptyRecipe, RecipeType } from '../models/Recipe';
 import RecipeCard from './RecipeCard';
 import Search from './Search'; 
 import EditIcon from '@mui/icons-material/Edit';
@@ -17,7 +17,7 @@ const RecipeList = () => {
   const recipes = useSelector((state: StoreType) => state.recipes.list);
   const loading = useSelector((state: StoreType) => state.recipes.loading);
   const dispatch = useDispatch<AppDispatch>();
-  const [selectedRecipe, setSelectedRecipe] = useState<RecipeType|null>(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<RecipeType>(emptyRecipe);
   const [searchQuery, setSearchQuery] = useState<string>(''); 
   const theme = useTheme();
   const { isOpen, openModal, closeModal } = useModal();
@@ -42,7 +42,6 @@ const RecipeList = () => {
     successAlert( "Recipe Deleted Successfully")
     }
   };
-
   return (
     <>
       <Container maxWidth={false} sx={{ padding: 0,width:'80vw',height:'70%'}}>
@@ -96,5 +95,4 @@ const RecipeList = () => {
     </>
   );
 };
-
 export default RecipeList;

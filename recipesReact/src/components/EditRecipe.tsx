@@ -15,7 +15,7 @@ import { useTheme } from '@mui/material/styles';
 import { successAlert } from "../services/alerts";
 import { RecipeType } from "../models/Recipe";
 
-const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose: () => void; recipe: RecipeType; }) => {
+const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose: () => void; recipe: Partial<RecipeType>; }) => {
   const theme = useTheme();
   const { user } = useContext(UserContext);
   
@@ -26,11 +26,14 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
     instructions: string().required('Instructions are required'),
   });
 
-  const { register, handleSubmit, formState: { errors }, control, reset } = useForm<RecipeType>({
+  type FormData = Omit<RecipeType, 'id' | 'authorId'>; 
+
+  const { register, handleSubmit, formState: { errors }, control, reset } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
+    
   });
 
-  const { fields: ingredientFields, append, remove } = useFieldArray({ control, name: "ingredients" });
+  const { fields: ingredientFields, append, remove } =  useFieldArray<FormData>({ control, name: "ingredients"  });
 
   useEffect(() => {
     if (recipe) reset(recipe);
@@ -38,20 +41,21 @@ const EditRecipe = ({ open, handleClose, recipe }: { open: boolean; handleClose:
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = (data: RecipeType) => {
-    dispatch(updateRecipe({ ...data, authorId: user.id }));
+  const onSubmit = (data: FormData) => {
+    dispatch(updateRecipe({ ...data as RecipeType, authorId: user.id }));
     successAlert("Recipe Updated Successfully")
     reset(); dispatch(fetchData()); handleClose();
   };
 
   const textFieldProps = (name: string, label: string, errorMessage?: string) => ({
+    
     fullWidth: true,
     margin: "normal" as const,
     label,
     error: !!errorMessage,
     helperText: errorMessage,
     sx: { '& .MuiInputBase-root': { borderColor: theme.palette.primary.main } },
-    ...register(name),
+    ...register(name as 'instructions'),
   });
 
   return (
